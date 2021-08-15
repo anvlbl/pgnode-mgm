@@ -1,0 +1,23 @@
+extends ../layouts/app.pug 
+
+block content  
+
+  p sipmle data
+
+    form(action='/posts' method='post')
+      div 
+        label
+          | name
+        input(type="text" name="name" value=form.name)
+      div        
+        label 
+          | gender
+        input(type="text" name="gender" value=form.gender)
+        label 
+          | email 
+        input(type="text" name="email" value=form.email)  
+        label 
+          | country 
+        input(type="text" name="country" value=form.country)  
+      p 
+        input(type="submit" value='Send')

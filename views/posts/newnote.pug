@@ -1,0 +1,23 @@
+extends ../layouts/app.pug 
+
+block content
+  h3 add New User 
+    form(action='/posts' method='post')
+      div 
+        label
+          | Name
+        input(name='name' value=form.name)
+      div 
+        label
+          | Age 
+        input(name="age" value=form.age)
+      div 
+        label 
+          | Gender 
+        input(name='gender' value=form.gender)
+      div 
+        label 
+          | Education 
+        input(name='education' value=form.education)
+      p 
+        input(type="submit" value='Send')                

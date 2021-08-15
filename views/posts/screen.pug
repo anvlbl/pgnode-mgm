@@ -1,0 +1,18 @@
+extends ../layouts/app.pug 
+
+block content
+  table 
+    tr 
+      th Id
+      th Name 
+      th Gender 
+      th Email 
+      th Country 
+    
+    each item in list
+      tr 
+        th= item.id
+        th= item.name 
+        th= item.gender 
+        th= item.email 
+        th= item.country
