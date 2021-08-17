@@ -1,0 +1,11 @@
+extends ../layouts/app.pug
+
+block content 
+
+    p test input 
+
+    form(action="/retrieve" method="post")
+        p input id 
+            input(type="text" name="id" value=inp.id)
+        p 
+            input(type="submit" name="send")

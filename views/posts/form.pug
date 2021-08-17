@@ -2,14 +2,13 @@ extends ../layouts/app.pug
 
 block content  
 
-  p sipmle data
+  p add new note in table
 
     form(action='/posts' method='post')
       div 
         label
           | name
-        input(type="text" name="name" value=form.name)
-      div        
+        input(type="text" name="name" value=form.name)              
         label 
           | gender
         input(type="text" name="gender" value=form.gender)
