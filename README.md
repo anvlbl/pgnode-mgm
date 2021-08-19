@@ -8,8 +8,12 @@ basic app for interacting with the database
 - Node-postgres
 - Pug
 
-## Планы на будущее
+## Plans on future
 
 - Rewrite to promises
 - Add a redirect with use SetTimeout
 - Add ORM
+- preparation for port DB
+- add new fuctions (update)
+- add autorization
+- add container for remote start
