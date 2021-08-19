@@ -24,7 +24,7 @@ export default () => {
     })
 
     app.get('/some', (req, res) => {
-        res.send('<h3>jojo</h3><a href='/'>back to main page');
+        res.send('<h3>jojo</h3>');
     })
 
     app.get('/retrieve', (req, res) => {
