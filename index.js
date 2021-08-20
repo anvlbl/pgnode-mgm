@@ -1,4 +1,4 @@
-import Express from 'express';
+import Express, { request, response } from 'express';
 import bodyParser from 'body-parser';
 
 import pgTools from 'pg';
@@ -27,14 +27,15 @@ export default () => {
     responce.send('<h3>jojo</h3>');
   })
 
+  //retrieve is area for testing new features
   app.get('/retrieve', (request, responce) => {
     const inp = [];
     responce.render('posts/scr', { inp });
   })
 
   app.post('/retrieve', (request, responce) => {
-    const { id } = request.body;
-    responce.send(`--|| ${id} ||--`);
+    const { id, type } = request.body;
+    responce.send(`inputs -- ${id} || ${type}`);
   })
 
   app.get('/posts', (request, responce) => {
@@ -69,16 +70,20 @@ export default () => {
   })
 
   app.post('/del', (request, responce) => {
-    const { name } = request.body;
-    const data = [name];
-    const query = 'DELETE FROM citizens WHERE name = $1';        
+    const { input, type } = request.body;
+    const data = [input];
+
+    const queries = {      
+      id: 'DELETE FROM citizens WHERE id = $1',
+      name: 'DELETE FROM citizens WHERE name = $1',
+    };
 
     pool
-      .query(query, data)
-      .then(results => responce.send(`note by name ${name} was deleted <a href='/'> back to main page`))
+      .query(queries[type], data)
+      .then(results => responce.send(`note by ${type} ${input} was deleted <a href='/'> back to main page`))
       .catch(error => console.error('the note cannot be removed'))    
   })
-
+   
   return app;
 };
 

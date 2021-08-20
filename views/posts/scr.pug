@@ -5,7 +5,11 @@ block content
     p test input 
 
     form(action="/retrieve" method="post")
-        p input id 
+        p   input data (check name or id) 
             input(type="text" name="id" value=inp.id)
+        p   Name
+            input(type="radio" name="type" value="name")
+        p   Id
+            input(type="radio" name="type" value="id")
         p 
             input(type="submit" name="send")

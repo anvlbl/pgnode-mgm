@@ -1,10 +1,13 @@
 extends ../layouts/app.pug 
 
 block content 
-    form(action='/del' method='post')
-        div 
-            label
-                |enter the name you want to remove
-            input(type="text" name="name" value=note.name)
-            p
-                input(type="submit" name="Send")
+  form(action='/del' method='post')
+    div 
+      p enter the name or id you want to remove
+        input(type="text" name="input" value=note.input)
+      p Check if Id 
+        input(type="radio" name="type" value="id")
+      p Check if Name 
+        input(type="radio" name="type" value="name")
+      p
+        input(type="submit" name="Send")
