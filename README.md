@@ -1,6 +1,6 @@
 ## Basic CRUD app
 
-basic app for interacting with the database
+App for interacting with the database with the simple UI
 
 ## The stack of used libraries and technologies
 
@@ -10,10 +10,10 @@ basic app for interacting with the database
 
 ## Plans on future
 
-- Rewrite to promises
+- Rewrite from callbacks to promises
 - Add a redirect with use SetTimeout
-- Add ORM
-- preparation for port DB
-- add new fuctions (update)
-- add autorization
-- add container for remote start
+- Add ORM (Sequelize)
+- Add new fuctions (update)
+- Add autorization
+- Add container for remote start
+- Rewrite app from educational to present
