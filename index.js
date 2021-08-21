@@ -28,15 +28,34 @@ export default () => {
   })
 
   //retrieve is area for testing new features
-  app.get('/retrieve', (request, responce) => {
+  // app.get('/retrieve', (request, responce) => {
+  //   const inp = [];
+  //   responce.render('posts/scr', { inp });
+  // })
+
+  // app.post('/retrieve', (request, responce) => {
+  //   const { id, type } = request.body;
+  //   setImmediate(responce.send(`inputs -- ${id} || ${type}`), 2000);
+  // })
+
+  //----
+  app.use('/retrieve', (request, responce, next) => {
     const inp = [];
     responce.render('posts/scr', { inp });
+    next();
   })
 
-  app.post('/retrieve', (request, responce) => {
+  app.use('/retrieve', (request, response, next) => {
+    setTimeout(response.send(`in progress`), 2000);
+    next();
+  })
+
+  app.use('/retrieve', (request, responce) => {
     const { id, type } = request.body;
     responce.send(`inputs -- ${id} || ${type}`);
   })
+
+  //----
 
   app.get('/posts', (request, responce) => {
     const form = [];
