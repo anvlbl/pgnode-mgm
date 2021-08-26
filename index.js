@@ -1,6 +1,6 @@
 import Express, { request, response } from 'express';
 import bodyParser from 'body-parser';
-
+import { Entity, createConnection } from 'typeorm';
 import pgTools from 'pg';
 const { Pool } = pgTools;
 
