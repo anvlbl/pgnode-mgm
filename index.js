@@ -22,11 +22,7 @@ export default () => {
     const cont = request.params.id;
     responce.send(`id.parameter -- ${cont}`);
   })
-
-  app.get('/some', (request, responce) => {
-    responce.send('<h3>jojo</h3>');
-  })
-
+  
   //retrieve is area for testing new features
 
   app.get('/retrieve', (request, responce) => {
@@ -51,15 +47,15 @@ export default () => {
 
     pool
       .query(query, values)
-      .then(results => responce.send(`note was added <a href='/'>back to main page`))
+      .then(resolve => responce.send(`note was added <a href='/'>back to main page`))
       .catch(error => console.error('note does not was added'))
   })
 
   app.get('/screen', (request, responce) => {
     pool
       .query('SELECT * FROM citizens')
-      .then(results => {
-        const list = results.rows;
+      .then(resolve => {
+        const list = resolve.rows;
         responce.status(200).render('posts/screen', { list });    
       })
       .catch(error => console.error('the page cannot be displayed'))
@@ -81,7 +77,7 @@ export default () => {
 
     pool
       .query(queries[type], data)
-      .then(results => responce.send(`note by ${type} ${input} was deleted <a href='/'> back to main page`))
+      .then(resolve => responce.send(`note by ${type} ${input} was deleted <a href='/'> back to main page`))
       .catch(error => console.error('the note cannot be removed'))    
   })
 
@@ -97,10 +93,9 @@ export default () => {
 
     pool
       .query(queryString, data)
-      .then(results => responce.send(`entry was updated`))
+      .then(resolve => responce.send(`entry was updated`))
       .catch(error => console.error('entry not updated, and app crashed'))
   })
    
   return app;
 };
-

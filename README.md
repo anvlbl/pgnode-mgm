@@ -12,9 +12,9 @@ App for interacting with the database with the simple UI
 
 - Rewrite from callbacks to promises (and from promises to async/await)
 - Rewrite from JS to TS
+- Rewrite from simple routes to middlewares (for screening data)
 - Add a redirect with use SetTimeout
 - Add ORM (Sequelize or TypeOrm)
-- Add new fuctions (update)
 - Add autorization
 - Add container for remote start
 - Rewrite app from educational to present
