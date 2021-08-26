@@ -60,7 +60,7 @@ export default () => {
       .query('SELECT * FROM citizens')
       .then(results => {
         const list = results.rows;
-        responce.render('posts/screen', { list });    
+        responce.status(200).render('posts/screen', { list });    
       })
       .catch(error => console.error('the page cannot be displayed'))
   })
@@ -83,6 +83,22 @@ export default () => {
       .query(queries[type], data)
       .then(results => responce.send(`note by ${type} ${input} was deleted <a href='/'> back to main page`))
       .catch(error => console.error('the note cannot be removed'))    
+  })
+
+  app.get('/update', (request, responce) => {
+    const note = [];
+    responce.render('posts/update', { note });
+  })
+
+  app.post('/update', (request, responce) => {
+    const { id, country } = request.body;
+    const data = [id, country];
+    const queryString = 'UPDATE citizens SET country = $2 WHERE id = $1';
+
+    pool
+      .query(queryString, data)
+      .then(results => responce.send(`entry was updated`))
+      .catch(error => console.error('entry not updated, and app crashed'))
   })
    
   return app;

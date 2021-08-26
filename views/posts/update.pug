@@ -1,0 +1,12 @@
+extends ../layouts/app.pug 
+
+block content 
+  p modify the current country 
+  form(action="/update" method="post")
+    div  
+      p input id of entry what you want to update 
+        input(type="text" name="id" value=note.id)
+      p input new country for this entry id
+        input(type="text" name="country" value=note.country)
+      p
+        input(type="submit" name="send")
