@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import pgTools from 'pg';
 const { Pool } = pgTools;
 
+import knex from './dbconfig/knex.js';
 import dbSet from './dbconfig/dbconfig.js';
     
 export default () => {    
@@ -76,7 +77,7 @@ export default () => {
 
     pool
       .query(queries[type], data)
-      .then(resolve => responce.send(`note by ${type} ${input} was deleted <a href='/'> back to main page`))
+      .then(resolve => responce.send(`note by ${type} ${input} was removed <a href='/'> back to main page`))
       .catch(error => console.error('the note cannot be removed'))    
   })
 
@@ -95,6 +96,11 @@ export default () => {
       .then(resolve => responce.send(`entry was updated`))
       .catch(error => console.error('entry not updated, and app crashed'))
   })
-   
+
+  app.get('/knexdata', async (request, response) => {
+    const data1 = await knex.select().from('citizens').where('id', 14);    
+    response.send(data1);
+  })
+  
   return app;
 };

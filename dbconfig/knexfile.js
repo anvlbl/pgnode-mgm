@@ -1,16 +1,11 @@
 // Update with your config settings.
+import dbconfig from "./dbconfig.js";
 
 export default {
   
   development: {
-    client: 'postgresql',
-    connection: {
-      host: localhost,
-      port: 3008,      
-      user:     'postgres',
-      password: '112',
-      database: 'newbase',
-    },
+    client: 'pg',
+    connection: dbconfig,
     pool: {
       min: 1,
       max: 10

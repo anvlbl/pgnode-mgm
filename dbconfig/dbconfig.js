@@ -1,6 +1,3 @@
-import knex from "knex";
-import knexfile from "./knexfile";
-
 export default {
     type: "postgres",
     user: "postgres",
