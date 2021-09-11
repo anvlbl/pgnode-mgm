@@ -1,10 +1,9 @@
 import Express, { request, response } from 'express';
 import bodyParser from 'body-parser';
-import { Entity, createConnection } from 'typeorm';
 import pgTools from 'pg';
 const { Pool } = pgTools;
 
-import dbSet from './dbconfig.js';
+import dbSet from './dbconfig/dbconfig.js';
     
 export default () => {    
   const pool = new Pool(dbSet);
