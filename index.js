@@ -97,10 +97,17 @@ export default () => {
       .catch(error => console.error('entry not updated, and app crashed'))
   })
 
-  app.get('/knexdata', async (request, response) => {
-    const data1 = await knex.select().from('citizens').where('id', 14);    
-    response.send(data1);
+  app.get('/knex', async (request, response) => {
+    const data = await knex.select().from('citizens').where('country', 'China').limit(5);   
+    console.log(data); 
+    response.send(data);
   })
   
+  app.get('/pg', async (request, response) => {
+    const data = await pool.query('SELECT * FROM citizens LIMIT 5 OFFSET 5');
+    const list = data.rows;            
+    response.json(list);
+  })
+
   return app;
 };
