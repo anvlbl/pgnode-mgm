@@ -14,59 +14,75 @@ export default () => {
 
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  app.get('/', (request, responce) =>{
-    responce.render('index');
+  app.get('/', (request, response) =>{
+    response.render('index');
   })
 
-  app.get('/routes/:id', (request, responce) => {
+  app.get('/routes/:id', (request, response) => {
     const cont = request.params.id;
-    responce.send(`id.parameter -- ${cont}`);
+    response.send(`id.parameter -- ${cont}`);
   })
   
   //retrieve is area for testing new features
 
-  app.get('/retrieve', (request, responce) => {
+  app.get('/retrieve', (request, response) => {
     const inp = [];
-    responce.render('posts/scr', { inp });
+    response.render('posts/scr', { inp });
   })
 
-  app.post('/retrieve', (request, responce) => {
+  app.post('/retrieve', (request, response) => {
     const { id, type } = request.body;
-    responce.send(`text- ${id} || flag- ${type}`);
+    response.send(`text- ${id} || flag- ${type}`);
   })
   
-  app.get('/posts', (request, responce) => {
-    const form = [];
-    responce.render('posts/form', { form });
-  })
+  // app.get('/posts', (request, response) => {
+  //   const form = [];
+  //   response.render('posts/form', { form });
+  // })
     
-  app.post('/posts', (request, responce) => {
-    const { name, gender, email, country } = request.body;
-    const query = 'INSERT INTO citizens (name, gender, email, country) VALUES ($1, $2, $3, $4)';
-    const values = [name, gender, email, country];
+  // app.post('/posts', (request, response) => {
+  //   const { name, gender, email, country } = request.body;
+  //   const query = 'INSERT INTO citizens (name, gender, email, country) VALUES ($1, $2, $3, $4)';
+  //   const values = [name, gender, email, country];
 
-    pool
-      .query(query, values)
-      .then(resolve => responce.send(`note was added <a href='/'>back to main page`))
-      .catch(error => console.error('note does not was added'))
-  })
+  //   pool
+  //     .query(query, values)
+  //     .then(resolve => response.send(`note was added <a href='/'>back to main page`))
+  //     .catch(error => console.error('note does not was added'))
+  // })
 
-  app.get('/screen', (request, responce) => {
+  app.route('/posts')
+    .get((request, response) => {
+      const form = [];
+      response.render('posts/form', { form });      
+    })
+    .post((request, response) => {
+      const { name, gender, email, country } = request.body;
+      const query = 'INSERT INTO citizens (name, gender, email, country) VALUES ($1, $2, $3, $4)';
+      const values = [name, gender, email, country];
+
+      pool
+        .query(query, values)
+        .then(resolve => response.send(`note was added <a href='/'>back to main page`))
+        .catch(error => console.error('note does not was added'))
+    })
+
+  app.get('/screen', (request, response) => {
     pool
       .query('SELECT * FROM citizens')
       .then(resolve => {
         const list = resolve.rows;
-        responce.status(200).render('posts/screen', { list });    
+        response.status(200).render('posts/screen', { list });    
       })
       .catch(error => console.error('the page cannot be displayed'))
   })
 
-  app.get('/del', (request, responce) => {
+  app.get('/del', (request, response) => {
     const note = [];
-    responce.render('posts/delete', { note });        
+    response.render('posts/delete', { note });        
   })
 
-  app.post('/del', (request, responce) => {
+  app.post('/del', (request, response) => {
     const { input, type } = request.body;
     const data = [input];
 
@@ -77,23 +93,23 @@ export default () => {
 
     pool
       .query(queries[type], data)
-      .then(resolve => responce.send(`note by ${type} ${input} was removed <a href='/'> back to main page`))
+      .then(resolve => response.send(`note by ${type} ${input} was removed <a href='/'> back to main page`))
       .catch(error => console.error('the note cannot be removed'))    
   })
 
-  app.get('/update', (request, responce) => {
+  app.get('/update', (request, response) => {
     const note = [];
-    responce.render('posts/update', { note });
+    response.render('posts/update', { note });
   })
 
-  app.post('/update', (request, responce) => {
+  app.post('/update', (request, response) => {
     const { id, country } = request.body;
     const data = [id, country];
     const queryString = 'UPDATE citizens SET country = $2 WHERE id = $1';
 
     pool
       .query(queryString, data)
-      .then(resolve => responce.send(`entry was updated`))
+      .then(resolve => response.send(`entry was updated`))
       .catch(error => console.error('entry not updated, and app crashed'))
   })
 
